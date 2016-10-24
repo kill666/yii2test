@@ -9,7 +9,7 @@ $this->params['breadcrumbs'] = false;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
-	Cумма долга:<?= Html::encode($price) ?>
+	Cумма долга:<?= Html::encode($model->summ) ?>
 	<table class="table">
 		<thead><tr>
 				<td>дата</td>

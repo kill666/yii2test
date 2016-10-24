@@ -42,11 +42,13 @@ class AdminController extends Controller {
 	public function actionSpent() { // Операции по кассе
 		$model = new Transaction();
 		$post = Yii::$app->request->post();
-		$model->load($post);
-		$kassa = new Kassa();
-		$result = $kassa->setMoney($this, $model);
-		if ($result && $model->validate() && $model->save()) {
-			return $this->render('/save');
+		if ($post) {
+			$model->load($post);
+			$kassa = new Kassa();
+			$result = $kassa->setMoney($this, $model);
+			if ($result && $model->validate() && $model->save()) {
+				return $this->render('/save');
+			}
 		}
 		return $this->render('//admin/spent', [
 					'model' => $model
@@ -63,9 +65,7 @@ class AdminController extends Controller {
 
 	public function actionTransaction() {
 		$model = new Transaction();
-		$price = Kassa::findOne(1)->money;
 		$result = $this->render('//admin/transactions', [
-			'price' => $price,
 			'model' => $model
 		]);
 		return $result;

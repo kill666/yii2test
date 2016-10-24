@@ -12,7 +12,7 @@ $this->title = 'Admin';
 $this->params['breadcrumbs'] = array('Admin');
 ?>
 <div class="site-index">
-	<span class="col-lg-12">В кассе: <?= $price ?></span>
+	<span class="col-lg-12">В кассе: <?= $model->kassa ?></span>
 	<table class="table">
 		<thead><tr>
 				<td>Пользователя номер</td>

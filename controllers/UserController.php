@@ -21,10 +21,8 @@ class UserController extends Controller {
 		$id = Yii::$app->user->getId();
 		$model = new Transaction();
 		$model->_id = $id;
-		$user = User::findOne($id);
 		return $this->render('//user/transactions', [
-					'model' => $model,
-					'price' => $user->money,
+					'model' => $model
 		]);
 	}
 

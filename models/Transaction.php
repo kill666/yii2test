@@ -62,13 +62,14 @@ class Transaction extends \yii\db\ActiveRecord {
 	}
 
 	public function getListTransaction() {// id - может быть пользовательским номером
+//		$this->fi
 		if (is_int($this->_id)) {
-			return parent::find()->select('transaction.*,s.name as status2')
+			return $this->find()->select('transaction.*,s.name as status2')
 							->leftjoin('status s', 's.id=transaction.status_id')
 							->where(['transaction.user_id' => $this->_id])
 							->all();
 		} else {
-			return parent::find()->select('transaction.*,u.username as username,s.name as status2')
+			return $this->find()->select('transaction.*,u.username as username,s.name as status2')
 							->leftjoin('user u', 'u.id=transaction.user_id')
 							->leftjoin('status s', 's.id=transaction.status_id')
 							->all();
@@ -81,6 +82,14 @@ class Transaction extends \yii\db\ActiveRecord {
 
 	public function getUser() {
 		return ArrayHelper::map(User::find()->all(), 'id', 'username');
+	}
+
+	public function getSumm() {
+		return User::findOne(\Yii::$app->user->getId())['money'];
+	}
+
+	public function getKassa() {
+		return Kassa::findOne(1)['money'];
 	}
 
 }
